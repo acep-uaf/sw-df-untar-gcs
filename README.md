@@ -82,6 +82,64 @@ python src/main.py \
 
 ```
 
+Here's how each of these variables can be defined in an environment file (`eiedeploy.env` for example):
+
+- `PROJECT_ID`: This is the ID of your Google Cloud project. You can find this in the Home Dashboard of your Google Cloud Console, it will be displayed under the project name. Fill it in like so:
+
+    ```bash
+    export PROJECT_ID='your-project-id'
+    ```
+
+- `REGION`: This is the region where you want your Dataflow job to run. It should be filled in like so:
+
+    ```bash
+    export REGION='your-region'
+    ```
+
+- `DESTINATION_BUCKET`: This is the name of the Google Cloud Storage (GCS) bucket where the untarred files will be stored. Fill it in like so:
+
+    ```bash
+    export DESTINATION_BUCKET='your-bucket-name'
+    ```
+
+- `STAGING_LOCATION`: This is the location in GCS where temporary files will be stored during the execution of the Dataflow job. It is often a path within the bucket specified in `DESTINATION_BUCKET`. Fill it in like so:
+
+    ```bash
+    export STAGING_LOCATION='gs://your-bucket-name/staging'
+    ```
+
+- `TEMP_LOCATION`: This is the location in GCS where additional temporary files will be stored during the execution of the Dataflow job. It's typically similar to `STAGING_LOCATION`. Fill it in like so:
+
+    ```bash
+    export TEMP_LOCATION='gs://your-bucket-name/temp'
+    ```
+
+- `TOPIC`: This is the Google Cloud Pub/Sub topic that the pipeline will subscribe to in order to receive messages. Fill it in like so:
+
+    ```bash
+    export TOPIC='projects/your-project-id/topics/your-topic-name'
+    ```
+
+- `OUTPUT_TOPIC`: This is the Google Cloud Pub/Sub topic to which the pipeline will publish messages. Fill it in like so:
+
+    ```bash
+    export OUTPUT_TOPIC='projects/your-project-id/topics/your-output-topic-name'
+    ```
+
+- `TABLE_NAME`: This is the name of the BigQuery table that will be used by the pipeline. Fill it in like so:
+
+    ```bash
+    export TABLE_NAME='your-table-name'
+    ```
+
+Once all of these variables are filled out and saved in the `eiedeploy.env` file, you can then source them in the terminal session before running your deployment script by executing:
+
+```bash
+source eiedeploy.env
+```
+
+This will make the variables available for the script in the terminal session.
+
 
 ### Dependencies
 
