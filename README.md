@@ -133,10 +133,6 @@ Here's how each of these variables can be defined in an environment file (`eiede
     ```
 
 
-```bash
-source eiedeploy.env
-```
-
 This will make the variables available for the script in the terminal session.
 
 
