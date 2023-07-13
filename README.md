@@ -132,7 +132,6 @@ Here's how each of these variables can be defined in an environment file (`eiede
     export TABLE_NAME='your-table-name'
     ```
 
-Once all of these variables are filled out and saved in the `eiedeploy.env` file, you can then source them in the terminal session before running your deployment script by executing:
 
 ```bash
 source eiedeploy.env
