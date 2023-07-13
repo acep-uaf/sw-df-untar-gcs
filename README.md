@@ -52,14 +52,14 @@ This script wraps the following exports, instalations, and deployment to the `da
 set -e
 
 
-export PROJECT_ID='acep-ext-eielson-2021'
-export REGION='us-west1'
-export DESTINATION_BUCKET='sw-eielson-untar'
-export STAGING_LOCATION='gs://eielson-tar-archive/staging'
-export TEMP_LOCATION='gs://eielson-tar-archive/temp'
-export TOPIC='projects/acep-ext-eielson-2021/topics/sw-ps-df-untar'
-export OUTPUT_TOPIC='projects/acep-ext-eielson-2021/topics/sw-df-cf-bq-ingest'
-export TABLE_NAME="vtnd"
+export PROJECT_ID=''
+export REGION=''
+export DESTINATION_BUCKET=''
+export STAGING_LOCATION=''
+export TEMP_LOCATION=''
+export TOPIC=''
+export OUTPUT_TOPIC=''
+export TABLE_NAME=''
 
 # Install required packages
 pip install -r ./requirements.txt
