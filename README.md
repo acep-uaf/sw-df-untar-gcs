@@ -82,7 +82,7 @@ python src/main.py \
 
 ```
 
-Here's how each of these variables can be defined in an environment file (`eiedeploy.env` for example):
+### Environment Variables
 
 - `PROJECT_ID`: This is the ID of your Google Cloud project. You can find this in the Home Dashboard of your Google Cloud Console, it will be displayed under the project name. Fill it in like so:
 
