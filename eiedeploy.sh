@@ -9,7 +9,8 @@ export REGION='us-west1'
 export DESTINATION_BUCKET='sw-eielson-untar'
 export STAGING_LOCATION='gs://eielson-tar-archive/staging'
 export TEMP_LOCATION='gs://eielson-tar-archive/temp'
-export TOPIC='projects/acep-ext-eielson-2021/topics/sw-ps-df-untar'
+#export TOPIC='projects/acep-ext-eielson-2021/topics/sw-ps-df-untar' swicting to new topic for new cf using bin payload
+export TOPIC='projects/acep-ext-eielson-2021/topics/sw-df-untar'
 export OUTPUT_TOPIC='projects/acep-ext-eielson-2021/topics/sw-df-cf-bq-ingest'
 export TABLE_NAME="vtnd"
 
