@@ -31,8 +31,14 @@ class ProcessFile(DoFn):
 
     def process(self, element, *args, **kwargs):
         try:
-            file_name = element.attributes['name']
-            source_bucket_name = element.attributes['bucket']
+            #file_name = element.attributes['name']
+            #source_bucket_name = element.attributes['bucket']
+            #message_payload = json.loads(element.data.decode('utf-8'))
+            message_payload = json.loads(element.decode('utf-8'))
+
+            file_name = message_payload['name']
+            source_bucket_name = message_payload['bucket']
+
             logging.info(f"Processing file: {file_name} in bucket {source_bucket_name}")
 
             # Get the file size
@@ -104,7 +110,8 @@ class ReadAndProcessFiles(PTransform):
     def expand(self, pcoll):
         return (
             pcoll
-            | "Read from Pub/Sub" >> ReadFromPubSub(topic=self.topic, with_attributes=True).with_output_types(PubsubMessage)
+           # | "Read from Pub/Sub" >> ReadFromPubSub(topic=self.topic, with_attributes=True).with_output_types(PubsubMessage)
+            | "Read from Pub/Sub" >> ReadFromPubSub(topic=self.topic).with_output_types(bytes)
             | "Process files" >> beam.ParDo(ProcessFile(self.project_id, self.destination_bucket, self.table))
             | "Write to Pub/Sub" >> WriteToPubSub(topic=self.output_topic)
         )
