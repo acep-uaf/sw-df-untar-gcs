@@ -29,6 +29,6 @@ python src/main.py \
   --region $REGION \
   --temp_location $TEMP_LOCATION \
   --staging_location $STAGING_LOCATION \
-  --job_name sw-df-untar-gcs \
+  --job_name sw-df-untar-gcs-new \
   --setup_file ./setup.py \
   --streaming
