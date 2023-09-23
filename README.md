@@ -42,8 +42,7 @@ Deploy this Cloud Function by running the `eiedeploy.sh` shell script:
 ./eiedeploy.sh
 ```
 
-
-This script wraps the following exports, instalations, and deployment to the `dataflowrunner`:
+This script sources the eiedeploy.env configuration file and sets up the required environment variables for the Apache Beam pipeline using `dataflowrunner`:
 
 ```bash
 #!/bin/bash
@@ -51,15 +50,8 @@ This script wraps the following exports, instalations, and deployment to the `da
 # Ensure the script stops on first error
 set -e
 
-
-export PROJECT_ID=''
-export REGION=''
-export DESTINATION_BUCKET=''
-export STAGING_LOCATION=''
-export TEMP_LOCATION=''
-export TOPIC=''
-export OUTPUT_TOPIC=''
-export TABLE_NAME=''
+# Source the .env file
+ source eiedeploy.env
 
 # Install required packages
 pip install -r ./requirements.txt
@@ -67,7 +59,7 @@ pip install -e .
 
 # Run the Apache Beam pipeline with DataflowRunner
 python src/main.py \
-  --runner DataflowRunner \
+  --runner $RUNNER \
   --project $PROJECT_ID \
   --destination_bucket $DESTINATION_BUCKET \
   --table $TABLE_NAME \
@@ -76,65 +68,66 @@ python src/main.py \
   --region $REGION \
   --temp_location $TEMP_LOCATION \
   --staging_location $STAGING_LOCATION \
-  --job_name sw-df-untar-gcs \
-  --setup_file ./setup.py \
+  --job_name $JOB_NAME \
+  --setup_file $SETUP_FILE \
   --streaming
-
 ```
 
-### Environment Variables
+### .env File Configuration
 
-- `PROJECT_ID`: This is the ID of your Google Cloud project. You can find this in the Home Dashboard of your Google Cloud Console, it will be displayed under the project name. Fill it in like so:
+Before deploying the Dataflow job, ensure that the `eiedeploy.env` file is appropriately configured, as the deployment script sources this file. The file should define values for:
 
-    ```bash
-    export PROJECT_ID='your-project-id'
-    ```
+```bash
+RUNNER=<value>
+PROJECT_ID=<value>
+REGION=<value>
+DESTINATION_BUCKET=<value>
+STAGING_LOCATION=<value>
+TEMP_LOCATION=<value>
+TOPIC=<value>
+OUTPUT_TOPIC=<value>
+TABLE_NAME=<value>
+JOB_NAME=<value>
+SETUP_FILE=<value>
+```
 
-- `REGION`: This is the region where you want your Dataflow job to run. It should be filled in like so:
+Replace `<value>` with the necessary values for your deployment.
 
-    ```bash
-    export REGION='your-region'
-    ```
+### Environment Variable Descriptions
+Below are descriptions for each environment variable used in the deployment script:
 
-- `DESTINATION_BUCKET`: This is the name of the Google Cloud Storage (GCS) bucket where the untarred files will be stored. Fill it in like so:
+- **RUNNER**= `<value>`:
+    - Description: Specifies the runner for the Apache Beam pipeline. For Dataflow, this will be DataflowRunner.
 
-    ```bash
-    export DESTINATION_BUCKET='your-bucket-name'
-    ```
+- **PROJECT_ID** = `<value>`: 
+    - Description: This is the ID of your Google Cloud project. You can find this in the Home Dashboard of your Google Cloud Console, it will be displayed under the project name. 
 
-- `STAGING_LOCATION`: This is the location in GCS where temporary files will be stored during the execution of the Dataflow job. It is often a path within the bucket specified in `DESTINATION_BUCKET`. Fill it in like so:
+- **REGION** = `<value>`: 
+    - Description: This is the region where you want your Dataflow job to run.
 
-    ```bash
-    export STAGING_LOCATION='gs://your-bucket-name/staging'
-    ```
+- **DESTINATION_BUCKET** = `<value>`: 
+    - Description: This is the name of the Google Cloud Storage (GCS) bucket where the untarred files will be stored.
 
-- `TEMP_LOCATION`: This is the location in GCS where additional temporary files will be stored during the execution of the Dataflow job. It's typically similar to `STAGING_LOCATION`. Fill it in like so:
+- **STAGING_LOCATION** = `<value>`:
+    - Description: This is the location in GCS where temporary files will be stored during the execution of the Dataflow job. It is often a path within the bucket specified in `DESTINATION_BUCKET`. 
 
-    ```bash
-    export TEMP_LOCATION='gs://your-bucket-name/temp'
-    ```
+- **TEMP_LOCATION** = `<value>`: 
+    - Description: This is the location in GCS where additional temporary files will be stored during the execution of the Dataflow job. It's typically similar to `STAGING_LOCATION`.
 
-- `TOPIC`: This is the Google Cloud Pub/Sub topic that the pipeline will subscribe to in order to receive messages. Fill it in like so:
+- **TOPIC** = `<value>`: 
+    - Description: This is the Google Cloud Pub/Sub topic that the pipeline will subscribe to in order to receive messages.
 
-    ```bash
-    export TOPIC='projects/your-project-id/topics/your-topic-name'
-    ```
+- **OUTPUT_TOPIC** = `<value>`: 
+    - Description: This is the Google Cloud Pub/Sub topic to which the pipeline will publish messages.
 
-- `OUTPUT_TOPIC`: This is the Google Cloud Pub/Sub topic to which the pipeline will publish messages. Fill it in like so:
+- **TABLE_NAME** = `<value>`: 
+    - Description: This is the name of the BigQuery table that will be used by the pipeline.
 
-    ```bash
-    export OUTPUT_TOPIC='projects/your-project-id/topics/your-output-topic-name'
-    ```
+- **JOB_NAME** = `<value>`:
+    - Description: The name of the Dataflow job.
 
-- `TABLE_NAME`: This is the name of the BigQuery table that will be used by the pipeline. Fill it in like so:
-
-    ```bash
-    export TABLE_NAME='your-table-name'
-    ```
-
-
-This will make the variables available for the script in the terminal session.
-
+- **SETUP_FILE** = `<value>`:
+    - Description: The setup file path, usually it's `./setup.py`.
 
 ### Dependencies
 
