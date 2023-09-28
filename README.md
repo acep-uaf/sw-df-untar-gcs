@@ -1,4 +1,10 @@
-# SW-DF-UNTAR-GCS BEAM Job
+# SW-DF-UNTAR-GCS BEAM JOB
+
+<br>
+
+Welcome to the `sw-df-untar-gcs` repository. This is an integral part of the ACEP SW Data Pipeline, responsible for handling the data extraction flow upon receipt of a notification for a new `.tar.gz` file in the GCP bucket.
+
+For a broader context of the entire system and how this repository functions within it, please visit the [ACEP SW Data Pipeline Overview](https://github.com/acep-uaf/sw-stack) repository.
 
 The `sw-df-gcs-ps-bq` is a Dataflow job designed to monitor a Pub/Sub topic for file metadata, extract and transfer these files from a Google Cloud Storage (GCS) bucket to a specified destination bucket, and subsequently publish a summary of the operation to another Pub/Sub topic.
 
