@@ -10,4 +10,11 @@ setup(
         'google-cloud-bigquery',
         'google-cloud-storage',
     ],
+    author = 'ACEP',
+    author_email = 'jhedmondson@alaska.edu',
+    url='https://github.com/acep-uaf/sw-cf-bq-gr-dash-load',
+    description = 'Beam un tar job',
+    license='MIT',
+    keywords='dataflow, gcp, processing'
+
 )
