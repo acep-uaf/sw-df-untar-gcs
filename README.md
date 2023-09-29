@@ -137,4 +137,9 @@ Below are descriptions for each environment variable used in the deployment scri
 
 ### Dependencies
 
-The Cloud Function's dependencies are listed in the `requirements.txt` file, and also referenced in the `setup.py` file. They include `apache-beam[gcp]`, `google-cloud-pubsub`, `google-cloud-storage`, and `google-cloud-bigquery` packages.
+The Cloud Function's dependencies are listed in the `requirements.txt` file, and also referenced in the `setup.py` file.
+Dependencies include:
+- `apache-beam[gcp]` 
+- `google-cloud-pubsub` 
+- `google-cloud-storage` 
+- `google-cloud-bigquery` 
