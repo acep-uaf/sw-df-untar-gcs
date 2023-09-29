@@ -148,7 +148,7 @@ Dependencies include:
 
 ### Conclusion
 
-The `sw-df-untar-gcs` repository provides an essential module for the ACEP SW Data Pipeline, focusing on efficiently processing and managing incoming .tar.gz files in the GCP environment. It showcases the synergy between various GCP services, such as Pub/Sub, Google Cloud Storage, and Apache Beam's capabilities in the form of Dataflow.
+The `sw-df-untar-gcs` repository provides an essential module for the [ACEP SW Data Pipeline](https://github.com/acep-uaf/sw-stack), focusing on efficiently processing and managing incoming .tar.gz files in the GCP environment. It showcases the synergy between various GCP services, such as Pub/Sub, Google Cloud Storage, and Apache Beam's capabilities in the form of Dataflow.
 
 Your feedback and contributions to improve and enhance this repository are always welcomed. As we believe in open-source collaboration, this repository is made available under the MIT License. We encourage you to go through the [LICENSE](https://github.com/acep-uaf/sw-df-untar-gcs/blob/main/LICENSE) file in the repository's root for detailed terms and conditions.
 
